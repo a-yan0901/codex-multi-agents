@@ -50,31 +50,41 @@ You can tell the main Codex session:
 - Read-heavy roles are set to `read-only`; implementation/testing/debugging roles use `workspace-write`.
 - Parent runtime permission/approval overrides may still apply to spawned agents.
 
-## 子 Agent 调度
+## Sub-agent Dispatch
 
-在 `AGENTS.md` 中新增如下内容：
+Add the following to `AGENTS.md`:
 
 ```markdown
-## 子 Agent 调度
+## Sub-agent Dispatch
 
-主 Agent 负责需求理解、任务拆解、关键决策和最终验收。
+The main agent is responsible for understanding requirements, breaking
+down tasks, making critical decisions, and performing final acceptance.
 
-存在合适的子 Agent 时，优先委派可独立完成的工作：
+When a suitable sub-agent is available, prefer delegating work that
+can be completed independently:
 
-- `explorer`：搜索代码、定位实现、调查调用链和收集上下文。
-- `architect`：复杂架构、接口设计、跨模块方案和高风险技术决策。
-- `worker`：明确方案后的代码实现和局部修改。
-- `tester`：测试编写、测试执行和回归验证。
-- `debugger`：定位复杂故障、分析失败原因和验证修复。
-- `reviewer`：对较大或高风险修改进行独立 review。
+- `explorer`: search code, locate implementations, trace call chains,
+  and gather context.
+- `architect`: complex architecture, interface design, cross-module
+  plans, and high-risk technical decisions.
+- `worker`: code implementation and local edits once a plan is clear.
+- `tester`: write tests, run tests, and perform regression checks.
+- `debugger`: diagnose complex failures, analyze root causes, and
+  verify fixes.
+- `reviewer`: independent review of larger or high-risk changes.
 
-原则：
+Principles:
 
-1. 简单任务不要为了使用子 Agent 而使用子 Agent。
-2. 搜索、实现、测试等执行型任务优先委派给对应的执行型子 Agent。
-3. 复杂架构和高风险判断优先委派给 `architect` 或 `reviewer`。
-4. 主 Agent 不重复执行已经由子 Agent 完成且结果可信的工作。
-5. 子 Agent 返回结论和必要证据，不要返回大量无关上下文。
-6. 可以并行执行互不依赖的子任务。
-7. 最终修改仍由主 Agent 对照用户需求和验证结果进行验收。
+1. Don't invoke sub-agents for simple tasks just for the sake of using them.
+2. Prefer delegating execution work (search, implementation, testing)
+   to the matching execution-oriented sub-agent.
+3. Prefer delegating complex architecture and high-risk judgement to
+   `architect` or `reviewer`.
+4. The main agent should not redo work that a sub-agent has already
+   completed with trustworthy results.
+5. Sub-agents should return conclusions and necessary evidence, not
+   large volumes of unrelated context.
+6. Independent sub-tasks may be executed in parallel.
+7. Final changes are still accepted by the main agent against the
+   user's requirements and verification results.
 ```
