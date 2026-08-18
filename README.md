@@ -1,5 +1,28 @@
 # Codex GPT-5.6 Multi-Agent Pack
 
+## Why this pack
+
+Running everything in a single Codex session means every task pays the
+cost of the full system prompt, the same long list of tools, and
+general-purpose instructions. For most real work that's overkill.
+
+This pack splits the work into six focused sub-agents — explorer,
+architect, worker, tester, debugger, and reviewer — each with a short,
+role-specific system prompt and a model / reasoning effort tuned to
+its job. The main Codex session reads the request, decides which kind
+of work it actually is (a quick search, a design question, a code
+change, a failing test, a complex bug, a risky edit), and dispatches
+it to the matching sub-agent.
+
+Two things fall out of that:
+
+- **Lower token usage.** Sub-agent prompts are tight and only mention
+  the tools and policies they need. The orchestrator doesn't pay for
+  the full general-purpose prompt on every turn.
+- **Cleaner separation of concerns.** Exploration, design, implementation,
+  verification, and review each run in their own context, so findings
+  don't leak into implementation or vice versa.
+
 This pack defines seven standalone Codex custom agents:
 
 - architect    -> gpt-5.6-terra / high
