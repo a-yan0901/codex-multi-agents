@@ -52,6 +52,11 @@ You can tell the main Codex session:
 
 ## 子 Agent 调度
 
+在 `AGENTS.md` 中新增如下内容：
+
+```markdown
+## 子 Agent 调度
+
 主 Agent 负责需求理解、任务拆解、关键决策和最终验收。
 
 存在合适的子 Agent 时，优先委派可独立完成的工作：
@@ -72,3 +77,4 @@ You can tell the main Codex session:
 5. 子 Agent 返回结论和必要证据，不要返回大量无关上下文。
 6. 可以并行执行互不依赖的子任务。
 7. 最终修改仍由主 Agent 对照用户需求和验证结果进行验收。
+```
