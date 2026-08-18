@@ -2,7 +2,6 @@
 
 This pack defines seven standalone Codex custom agents:
 
-- orchestrator -> gpt-5.6-sol / medium
 - architect    -> gpt-5.6-terra / high
 - worker       -> gpt-5.6-luna / medium
 - tester       -> gpt-5.6-luna / medium
