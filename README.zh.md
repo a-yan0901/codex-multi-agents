@@ -1,6 +1,6 @@
-# Codex GPT-5.6 Multi-Agent Pack
+# Codex GPT-5.6 多 Agent 包
 
-This pack defines seven standalone Codex custom agents:
+本包提供六个独立的 Codex 自定义 Agent：
 
 - architect    -> gpt-5.6-terra / high
 - worker       -> gpt-5.6-luna / medium
@@ -9,23 +9,23 @@ This pack defines seven standalone Codex custom agents:
 - explorer     -> gpt-5.6-luna / low
 - reviewer     -> gpt-5.6-terra / high
 
-## Install on Windows PowerShell
+## Windows PowerShell 安装
 
 ```powershell
 New-Item -ItemType Directory -Force "$HOME\.codex\agents" | Out-Null
 Copy-Item ".\agents\*.toml" "$HOME\.codex\agents\" -Force
 ```
 
-## Install on macOS / Linux
+## macOS / Linux 安装
 
 ```bash
 mkdir -p ~/.codex/agents
 cp ./agents/*.toml ~/.codex/agents/
 ```
 
-## Optional global multi-agent defaults
+## 可选的全局多 Agent 默认配置
 
-Add this to `~/.codex/config.toml` if desired:
+如果需要启用，可以把以下内容追加到 `~/.codex/config.toml`：
 
 ```toml
 [agents]
@@ -35,20 +35,13 @@ default_subagent_model = "gpt-5.6-luna"
 default_subagent_reasoning_effort = "medium"
 ```
 
-The standalone agent files explicitly pin their own models/effort, so those values take precedence for these named agents.
+独立的 Agent 文件中已经显式指定了 `model` 和 `model_reasoning_effort`，所以这些命名 Agent 会优先使用自身配置。
 
-## Suggested parent-agent instruction
+## 建议的主 Agent 提示词
 
-You can tell the main Codex session:
+可以让主 Codex 会话这样理解任务：
 
-> Coordinate this task as the orchestrator. Keep architecture and final decisions in the main thread. Delegate codebase discovery to explorer, design questions to architect, implementation to worker, validation to tester, difficult failures to debugger, and final review to reviewer. Avoid duplicating delegated work and prefer Luna workers for routine execution.
-
-## Notes
-
-- Custom agent files require `name`, `description`, and `developer_instructions`.
-- The agent `model` and `model_reasoning_effort` override inherited defaults.
-- Read-heavy roles are set to `read-only`; implementation/testing/debugging roles use `workspace-write`.
-- Parent runtime permission/approval overrides may still apply to spawned agents.
+> 由当前会话担任 orchestrator，负责协调本任务。架构和最终决策保留在主线程；代码库探索委派给 explorer，方案设计委派给 architect，实现委派给 worker，验证委派给 tester，复杂故障委派给 debugger，最终 review 委派给 reviewer。避免重复委派，并优先使用 Luna worker 处理常规执行任务。
 
 ## 子 Agent 调度
 
@@ -72,3 +65,14 @@ You can tell the main Codex session:
 5. 子 Agent 返回结论和必要证据，不要返回大量无关上下文。
 6. 可以并行执行互不依赖的子任务。
 7. 最终修改仍由主 Agent 对照用户需求和验证结果进行验收。
+
+## 注意事项
+
+- 自定义 Agent 文件必须包含 `name`、`description` 和 `developer_instructions`。
+- Agent 的 `model` 和 `model_reasoning_effort` 会覆盖继承的默认配置。
+- 偏读取的角色设置为 `read-only`，实现/测试/调试类角色使用 `workspace-write`。
+- 父会话的运行时权限/审批设置仍可能作用于派生的 Agent。
+
+## English Version
+
+See [README.md](README.md) for the English version.
